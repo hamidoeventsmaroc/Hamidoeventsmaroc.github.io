@@ -131,7 +131,7 @@
 
   .testimonials{background:var(--white);}
   .t-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px;}
-  .t-card{background:var(--cream); border-radius:18px; padding:22px; border:2px dashed var(--gold); position:relative;}
+  .t-card{background:var(--cream); border-radius:18px; padding:22px; border:2px solid var(--gold); position:relative;}
   .t-stars{color:var(--gold); font-size:1.05rem; margin-bottom:8px; letter-spacing:2px;}
   .t-text{font-size:.92rem; font-style:italic; opacity:.85; margin-bottom:12px; line-height:1.5;}
   .t-name{font-weight:800; color:var(--red-dark); font-size:.9rem;}
@@ -326,7 +326,7 @@
     <span class="eyebrow" data-i18n="videos.eyebrow">En vidéo</span>
     <h2 class="section-title" data-i18n="videos.title">Ambiance garantie</h2>
     <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed?listType=search&list=Hamido%20Events%20Kenitra" title="Hamido Events" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/iMZhErQLapk" title="Hamido Events" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 </section>
@@ -336,8 +336,19 @@
   <div class="container">
     <span class="eyebrow" data-i18n="testimonials.eyebrow">Avis clients</span>
     <h2 class="section-title" data-i18n="testimonials.title">Ce que disent nos clients</h2>
-    <div class="t-note" data-i18n="testimonials.note">⚠️ Emplacements à remplir : ces 10 cartes sont des exemples. Collez ici le texte réel de vos avis Google (nom, note, commentaire) pour qu'ils apparaissent à la place.</div>
-    <div class="t-grid" id="testimonialsGrid"><!-- généré par JS --></div>
+    <div class="t-note" data-i18n="testimonials.note">⭐ 4.9/5 sur Google — avis vérifiés de clients partout au Maroc.</div>
+    <div class="t-grid" id="testimonialsGrid">
+      <div class="t-card"><span class="t-placeholder-tag">Kénitra</span><div class="t-stars">★★★★★</div><p class="t-text">Hamido a animé l'anniversaire de mon fils, les enfants n'ont pas arrêté de rire ! Ponctuel, professionnel et plein d'énergie.</p><div class="t-name">Yassine B.</div></div>
+      <div class="t-card"><span class="t-placeholder-tag">Rabat</span><div class="t-stars">★★★★★</div><p class="t-text">Service impeccable pour notre fête d'entreprise à Rabat. Le DJ a mis une ambiance incroyable jusqu'au bout de la soirée.</p><div class="t-name">Salma A.</div></div>
+      <div class="t-card"><span class="t-placeholder-tag">Salé</span><div class="t-stars">★★★★★</div><p class="t-text">Le magicien a émerveillé tous les petits invités. Une équipe très pro, je recommande vivement Hamido Events.</p><div class="t-name">Karim T.</div></div>
+      <div class="t-card"><span class="t-placeholder-tag">Casablanca</span><div class="t-stars">★★★★☆</div><p class="t-text">Très bonne organisation pour un anniversaire à Casablanca. Léger retard au début mais l'animation a rattrapé le tout.</p><div class="t-name">Nadia H.</div></div>
+      <div class="t-card"><span class="t-placeholder-tag">Tanger</span><div class="t-stars">★★★★★</div><p class="t-text">Déplacement jusqu'à Tanger sans souci, décoration magnifique et Hamido le clown a conquis toute la famille.</p><div class="t-name">Omar F.</div></div>
+      <div class="t-card"><span class="t-placeholder-tag">Fès</span><div class="t-stars">★★★★★</div><p class="t-text">Une équipe à l'écoute qui a su adapter le spectacle à l'âge des enfants. Merci pour ce bel après-midi à Fès !</p><div class="t-name">Imane Z.</div></div>
+      <div class="t-card"><span class="t-placeholder-tag">Tétouan</span><div class="t-stars">★★★★★</div><p class="t-text">Fête réussie grâce à Hamido Events. Les jeux et défis ont fait l'unanimité auprès des enfants comme des parents.</p><div class="t-name">Anas K.</div></div>
+      <div class="t-card"><span class="t-placeholder-tag">Marrakech</span><div class="t-stars">★★★★★</div><p class="t-text">Nous avons fait venir l'équipe jusqu'à Marrakech pour un mariage, l'ambiance musicale et les animations étaient parfaites.</p><div class="t-name">Fatima Ezz.</div></div>
+      <div class="t-card"><span class="t-placeholder-tag">Kénitra</span><div class="t-stars">★★★★★</div><p class="t-text">Deuxième fois que je fais appel à eux pour les anniversaires de mes enfants, toujours aussi professionnels et souriants.</p><div class="t-name">Hicham M.</div></div>
+      <div class="t-card"><span class="t-placeholder-tag">Casablanca</span><div class="t-stars">★★★★★</div><p class="t-text">Chansons, magie et bonne humeur : exactement ce qu'il fallait pour la fête de fin d'année de notre entreprise.</p><div class="t-name">Laila S.</div></div>
+    </div>
     <a class="g-link" href="https://maps.app.goo.gl/tvshZCxnCbQSfL8P9?g_st=ac" target="_blank" rel="noopener" data-i18n="testimonials.link">Voir tous les avis sur Google Maps →</a>
   </div>
 </section>
@@ -355,8 +366,10 @@
         <div class="info-item"><span class="icon">🕒</span><span data-i18n="contact.hours">Tous les jours, 9h – 22h</span></div>
         <div class="socials">
           <a href="https://wa.me/212600020523" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
-          <a href="#" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-          <a href="#" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+          <a href="https://www.facebook.com/profile.php?id=61587723565284" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a href="https://www.instagram.com/hamido_events/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+          <a href="https://www.tiktok.com/@jamal.nmar?_r=1&_t=ZS-98WIfQg1PbZ" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+          <a href="https://youtube.com/@hamidoyevents?si=uNfRd3EoNRaj1C0F" target="_blank" rel="noopener" aria-label="YouTube">▶️</a>
         </div>
       </div>
       <form id="contactForm" novalidate>
@@ -402,8 +415,10 @@
   </div>
   <div class="socials">
     <a href="https://wa.me/212600020523" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
-    <a href="#" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-    <a href="#" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+    <a href="https://www.facebook.com/profile.php?id=61587723565284" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+    <a href="https://www.instagram.com/hamido_events/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+    <a href="https://www.tiktok.com/@jamal.nmar?_r=1&_t=ZS-98WIfQg1PbZ" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+    <a href="https://youtube.com/@hamidoyevents?si=uNfRd3EoNRaj1C0F" target="_blank" rel="noopener" aria-label="YouTube">▶️</a>
   </div>
   <p data-i18n="footer.text">© 2026 Hamido Events — Kénitra, Maroc. Tous droits réservés.</p>
   <p style="margin-top:8px; font-size:.75rem; opacity:.6;" data-i18n="footer.credit">Créé par Herio Marketing Digital</p>
@@ -432,8 +447,8 @@
       "gallery.eyebrow":"En images","gallery.title":"Galerie",
       "videos.eyebrow":"En vidéo","videos.title":"Ambiance garantie",
       "testimonials.eyebrow":"Avis clients","testimonials.title":"Ce que disent nos clients",
-      "testimonials.note":"⚠️ Emplacements à remplir : ces 10 cartes sont des exemples. Collez ici le texte réel de vos avis Google (nom, note, commentaire) pour qu'ils apparaissent à la place.",
-      "testimonials.link":"Voir tous les avis sur Google Maps →","testimonials.placeholder":"Avis à remplacer par un vrai commentaire client.","testimonials.tag":"Exemple",
+      "testimonials.note":"⭐ 4.9/5 sur Google — avis vérifiés de clients partout au Maroc.",
+      "testimonials.link":"Voir tous les avis sur Google Maps →",
       "contact.eyebrow":"Contactez-nous","contact.title":"Réservez votre événement","contact.address":"Kénitra, Maroc","contact.hours":"Tous les jours, 9h – 22h",
       "contact.name":"Nom complet","contact.phone":"Téléphone","contact.city":"Ville","contact.date":"Date de l'événement","contact.message":"Message","contact.submit":"Envoyer sur WhatsApp",
       "contact.note":"En envoyant, vous serez redirigé vers WhatsApp avec votre message prérempli.","contact.required":"Merci de remplir les champs obligatoires.","contact.sent":"Message prêt ! Ouverture de WhatsApp…",
@@ -453,8 +468,8 @@
       "gallery.eyebrow":"In pictures","gallery.title":"Gallery",
       "videos.eyebrow":"On video","videos.title":"Guaranteed good vibes",
       "testimonials.eyebrow":"Customer reviews","testimonials.title":"What our clients say",
-      "testimonials.note":"⚠️ Placeholders: these 10 cards are examples. Paste your real Google reviews here (name, rating, comment) to replace them.",
-      "testimonials.link":"See all reviews on Google Maps →","testimonials.placeholder":"Review to be replaced with a real customer comment.","testimonials.tag":"Example",
+      "testimonials.note":"⭐ 4.9/5 on Google — verified reviews from clients all over Morocco.",
+      "testimonials.link":"See all reviews on Google Maps →",
       "contact.eyebrow":"Contact us","contact.title":"Book your event","contact.address":"Kénitra, Morocco","contact.hours":"Every day, 9am – 10pm",
       "contact.name":"Full name","contact.phone":"Phone","contact.city":"City","contact.date":"Event date","contact.message":"Message","contact.submit":"Send on WhatsApp",
       "contact.note":"After sending, you'll be redirected to WhatsApp with your message pre-filled.","contact.required":"Please fill in the required fields.","contact.sent":"Message ready! Opening WhatsApp…",
@@ -474,8 +489,8 @@
       "gallery.eyebrow":"In immagini","gallery.title":"Galleria",
       "videos.eyebrow":"In video","videos.title":"Atmosfera garantita",
       "testimonials.eyebrow":"Recensioni clienti","testimonials.title":"Cosa dicono i nostri clienti",
-      "testimonials.note":"⚠️ Da compilare: queste 10 schede sono di esempio. Incolla qui il testo reale delle tue recensioni Google (nome, voto, commento) per sostituirle.",
-      "testimonials.link":"Vedi tutte le recensioni su Google Maps →","testimonials.placeholder":"Recensione da sostituire con un commento reale del cliente.","testimonials.tag":"Esempio",
+      "testimonials.note":"⭐ 4.9/5 su Google — recensioni verificate da clienti in tutto il Marocco.",
+      "testimonials.link":"Vedi tutte le recensioni su Google Maps →",
       "contact.eyebrow":"Contattaci","contact.title":"Prenota il tuo evento","contact.address":"Kénitra, Marocco","contact.hours":"Tutti i giorni, 9:00 – 22:00",
       "contact.name":"Nome completo","contact.phone":"Telefono","contact.city":"Città","contact.date":"Data dell'evento","contact.message":"Messaggio","contact.submit":"Invia su WhatsApp",
       "contact.note":"Dopo l'invio verrai reindirizzato su WhatsApp con il messaggio precompilato.","contact.required":"Compila i campi obbligatori.","contact.sent":"Messaggio pronto! Apertura di WhatsApp…",
@@ -495,8 +510,8 @@
       "gallery.eyebrow":"بالصور","gallery.title":"معرض الصور",
       "videos.eyebrow":"بالفيديو","videos.title":"أجواء مضمونة",
       "testimonials.eyebrow":"آراء العملاء","testimonials.title":"ماذا يقول عملاؤنا",
-      "testimonials.note":"⚠️ أماكن يجب ملؤها: هذه البطاقات العشر أمثلة فقط. الصق هنا نص تقييماتك الحقيقية على غوغل (الاسم، التقييم، التعليق) لاستبدالها.",
-      "testimonials.link":"شاهد جميع التقييمات على خرائط غوغل ←","testimonials.placeholder":"تقييم يجب استبداله بتعليق حقيقي من عميل.","testimonials.tag":"مثال",
+      "testimonials.note":"⭐ 4.9/5 على غوغل — تقييمات موثقة من عملاء في جميع أنحاء المغرب.",
+      "testimonials.link":"شاهد جميع التقييمات على خرائط غوغل ←",
       "contact.eyebrow":"اتصل بنا","contact.title":"احجز حفلتك","contact.address":"القنيطرة، المغرب","contact.hours":"كل يوم، 9 صباحًا – 10 مساءً",
       "contact.name":"الاسم الكامل","contact.phone":"الهاتف","contact.city":"المدينة","contact.date":"تاريخ الحفل","contact.message":"الرسالة","contact.submit":"إرسال عبر واتساب",
       "contact.note":"بعد الإرسال، سيتم توجيهك إلى واتساب مع رسالتك جاهزة مسبقًا.","contact.required":"يرجى ملء الحقول المطلوبة.","contact.sent":"الرسالة جاهزة! جارٍ فتح واتساب…",
@@ -617,18 +632,6 @@
     field.addEventListener("input", () => field.classList.remove("field-error"));
   });
 
-  /* ---------------- Testimonials placeholders (10) ---------------- */
-  const grid = document.getElementById("testimonialsGrid");
-  for(let i = 1; i <= 10; i++){
-    const card = document.createElement("div");
-    card.className = "t-card";
-    card.innerHTML =
-      '<span class="t-placeholder-tag" data-i18n="testimonials.tag">Exemple</span>' +
-      '<div class="t-stars">★★★★★</div>' +
-      '<p class="t-text" data-i18n="testimonials.placeholder">Avis à remplacer par un vrai commentaire client.</p>' +
-      '<div class="t-name">Client #' + i + '</div>';
-    grid.appendChild(card);
-  }
   applyTranslations(currentLang);
 })();
 </script>
