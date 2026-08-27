@@ -50,8 +50,9 @@
   .brand img{height:48px; width:48px; border-radius:10px; object-fit:contain; background:var(--white);}
   .brand span{font-family:var(--font-display); font-size:1.35rem; font-weight:800; color:var(--red-dark);}
   nav.links{display:flex; gap:26px; align-items:center;}
-  nav.links a{font-weight:700; font-size:.95rem; padding:6px 2px; border-bottom:3px solid transparent; transition:.2s;}
+  nav.links a{font-weight:700; font-size:.95rem; padding:6px 2px; border-bottom:3px solid transparent; transition:.2s; position:relative;}
   nav.links a:hover, nav.links a:focus-visible{border-bottom-color:var(--gold); color:var(--red-dark);}
+  nav.links a.active{color:var(--red-dark); border-bottom-color:var(--red);}
   .lang-switch{display:flex; gap:6px;}
   .lang-switch button{background:var(--cream); border:2px solid var(--red); color:var(--red-dark); font-weight:800; font-size:.78rem; padding:6px 10px; border-radius:20px; transition:.2s;}
   .lang-switch button.active, .lang-switch button:hover{background:var(--red); color:var(--white);}
@@ -63,10 +64,11 @@
   .burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
 
   @media(max-width:860px){
-    nav.links{position:absolute; top:100%; left:0; right:0; background:var(--white); flex-direction:column; padding:16px 24px; gap:14px; box-shadow:0 8px 12px rgba(0,0,0,.08); display:none;}
-    nav.links.open{display:flex;}
+    nav.links{position:absolute; top:100%; left:0; right:0; background:var(--white); flex-direction:column; padding:16px 24px; gap:14px; box-shadow:0 8px 12px rgba(0,0,0,.08); display:none; max-height:70vh; overflow-y:auto;}
+    nav.links.open{display:flex; animation:slideDown .25s ease;}
     .burger{display:flex;}
   }
+  @keyframes slideDown{from{opacity:0; transform:translateY(-8px);} to{opacity:1; transform:translateY(0);}}
 
   .hero{position:relative; background:repeating-linear-gradient(45deg, var(--red) 0 26px, var(--red-dark) 26px 52px); padding:70px 24px 90px; color:var(--white); text-align:center; overflow:hidden;}
   .hero .balloon{position:absolute; border-radius:50% 50% 50% 50%/60% 60% 40% 40%; opacity:.85; animation:float 6s ease-in-out infinite;}
@@ -128,6 +130,10 @@
 
   .video-wrap{max-width:760px; margin:0 auto; border-radius:20px; overflow:hidden; box-shadow:0 10px 0 var(--gold); aspect-ratio:16/9;}
   .video-wrap iframe{width:100%; height:100%; border:0;}
+  .video-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; max-width:900px; margin:28px auto 0;}
+  .video-card{position:relative; border-radius:18px; overflow:hidden; box-shadow:0 8px 0 var(--gold); aspect-ratio:9/16; background:#000;}
+  .video-card video{width:100%; height:100%; object-fit:cover; display:block;}
+  .video-card .v-tag{position:absolute; top:10px; left:10px; background:var(--red); color:var(--white); font-size:.7rem; font-weight:800; padding:4px 10px; border-radius:10px; z-index:2;}
 
   .testimonials{background:var(--white);}
   .t-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px;}
@@ -147,8 +153,10 @@
   .info-item{display:flex; align-items:center; gap:14px; background:rgba(255,255,255,.12); padding:14px 18px; border-radius:14px; font-weight:700;}
   .info-item .icon{font-size:1.4rem;}
   .socials{display:flex; gap:12px; margin-top:8px; flex-wrap:wrap;}
-  .socials a{width:46px; height:46px; border-radius:50%; background:var(--white); color:var(--red-dark); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; transition:.2s;}
-  .socials a:hover{background:var(--gold);}
+  .socials a{width:46px; height:46px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; transition:.2s; box-shadow:0 3px 0 rgba(0,0,0,.15);}
+  .socials a svg{width:22px; height:22px;}
+  .socials a:hover{transform:translateY(-4px) scale(1.06);}
+
   form{background:var(--white); color:var(--ink); border-radius:22px; padding:30px; display:flex; flex-direction:column; gap:14px;}
   form label{font-weight:800; font-size:.85rem; margin-bottom:-8px; color:var(--red-dark);}
   form input, form select, form textarea{padding:12px 14px; border-radius:10px; border:2px solid #eee; font-family:inherit; font-size:.95rem; background:var(--cream);}
@@ -159,6 +167,20 @@
   form .btn:disabled{opacity:.6; cursor:not-allowed;}
   .form-note{font-size:.78rem; opacity:.75; text-align:center;}
   .field-error{border-color:var(--red-dark) !important; outline:2px solid var(--red-dark);}
+  .form-steps{display:flex; gap:8px; margin-bottom:6px;}
+  .form-steps span{flex:1; height:6px; border-radius:4px; background:#eee; transition:.3s;}
+  .form-steps span.done{background:var(--red);}
+  .chip-group{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip-check{position:relative;}
+  .chip-check input{position:absolute; opacity:0; width:1px; height:1px;}
+  .chip-check label{margin:0; display:inline-flex; align-items:center; gap:6px; background:var(--cream); border:2px solid #eee; color:var(--ink); font-weight:700; font-size:.82rem; padding:8px 14px; border-radius:20px; cursor:pointer; transition:.2s;}
+  .chip-check input:checked + label{background:var(--red); border-color:var(--red); color:var(--white);}
+  .qty-row{display:flex; align-items:center; gap:12px;}
+  .qty-row button{width:34px; height:34px; border-radius:50%; background:var(--red); color:var(--white); font-weight:800; font-size:1.1rem; flex-shrink:0;}
+  .qty-row span{font-weight:800; font-size:1.05rem; min-width:30px; text-align:center;}
+  .form-success{display:none; text-align:center; padding:20px;}
+  .form-success.show{display:block;}
+  .form-success .icon{font-size:3rem;}
 
   footer{background:var(--ink); color:var(--white); padding:40px 24px 24px; text-align:center;}
   footer .brand{justify-content:center; margin-bottom:14px;}
@@ -169,15 +191,77 @@
   footer .foot-links a{opacity:.85;}
   footer .foot-links a:hover{opacity:1; color:var(--gold);}
 
-  .whatsapp-float{position:fixed; bottom:24px; right:24px; z-index:200; background:#25D366; color:var(--white); width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.8rem; box-shadow:0 6px 16px rgba(0,0,0,.3); transition:.2s;}
+  /* ---- Floating WhatsApp button (advanced) ---- */
+  .whatsapp-float{position:fixed; bottom:24px; right:24px; z-index:210; background:#25D366; color:var(--white); width:62px; height:62px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,.35); transition:.2s;}
+  .whatsapp-float svg{width:32px; height:32px;}
   .whatsapp-float:hover{transform:scale(1.08);}
+  .whatsapp-float .wa-ring{position:absolute; inset:0; border-radius:50%; border:3px solid #25D366; animation:waPulse 2.2s ease-out infinite;}
+  .whatsapp-float .wa-ring2{animation-delay:1.1s;}
+  @keyframes waPulse{0%{transform:scale(1); opacity:.7;} 100%{transform:scale(1.9); opacity:0;}}
+  .whatsapp-float .wa-badge{position:absolute; top:-4px; left:-4px; background:var(--gold); color:var(--ink); font-size:.7rem; font-weight:800; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 4px rgba(0,0,0,.3);}
+  .whatsapp-float .wa-tip{position:absolute; right:74px; bottom:14px; background:var(--ink); color:var(--white); font-size:.82rem; font-weight:700; padding:8px 14px; border-radius:10px; white-space:nowrap; opacity:0; transform:translateX(8px); transition:.2s; pointer-events:none;}
+  .whatsapp-float:hover .wa-tip{opacity:1; transform:translateX(0);}
+  @media(prefers-reduced-motion:reduce){.whatsapp-float .wa-ring{animation:none;}}
   body[dir="rtl"] .whatsapp-float{right:auto; left:24px;}
+  body[dir="rtl"] .whatsapp-float .wa-badge{left:auto; right:-4px;}
+  body[dir="rtl"] .whatsapp-float .wa-tip{right:auto; left:74px;}
+
+  /* ---- Floating social sidebar (advanced, original logos) ---- */
+  .social-sidebar{position:fixed; top:50%; right:22px; transform:translateY(-50%); z-index:190; display:flex; flex-direction:column; gap:10px;}
+  body[dir="rtl"] .social-sidebar{right:auto; left:22px;}
+  .social-sidebar a{width:46px; height:46px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(0,0,0,.2); transition:.25s; position:relative;}
+  .social-sidebar a svg{width:22px; height:22px;}
+  .social-sidebar a:hover{transform:scale(1.12) translateX(-4px);}
+  body[dir="rtl"] .social-sidebar a:hover{transform:scale(1.12) translateX(4px);}
+  .social-sidebar a .s-label{position:absolute; right:56px; background:var(--ink); color:var(--white); font-size:.75rem; font-weight:700; padding:6px 12px; border-radius:8px; white-space:nowrap; opacity:0; pointer-events:none; transition:.2s; transform:translateX(6px);}
+  body[dir="rtl"] .social-sidebar a .s-label{right:auto; left:56px; transform:translateX(-6px);}
+  .social-sidebar a:hover .s-label{opacity:1; transform:translateX(0);}
+  @media(max-width:760px){.social-sidebar{display:none;}}
+
   .back-top{position:fixed; bottom:24px; left:24px; z-index:200; background:var(--gold); color:var(--ink); width:48px; height:48px; border-radius:50%; display:none; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800; box-shadow:0 6px 16px rgba(0,0,0,.25);}
   body[dir="rtl"] .back-top{left:auto; right:24px;}
   .back-top.show{display:flex;}
   #toast{position:fixed; bottom:100px; right:24px; background:var(--ink); color:var(--white); padding:14px 20px; border-radius:12px; font-weight:700; z-index:300; opacity:0; pointer-events:none; transition:.3s; max-width:280px;}
   #toast.show{opacity:1; transform:translateY(-6px);}
   body[dir="rtl"] #toast{right:auto; left:24px;}
+
+  /* ---- AI chat widget ---- */
+  .ai-launcher{position:fixed; bottom:96px; right:24px; z-index:210; width:62px; height:62px; border-radius:50%; background:linear-gradient(135deg,var(--red),var(--red-dark)); color:var(--white); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,.35); transition:.2s;}
+  .ai-launcher svg{width:28px; height:28px;}
+  .ai-launcher:hover{transform:scale(1.08);}
+  .ai-launcher .ai-dot{position:absolute; top:2px; right:2px; width:14px; height:14px; background:var(--gold); border-radius:50%; border:2px solid var(--white); animation:aiBlink 1.8s ease-in-out infinite;}
+  @keyframes aiBlink{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  body[dir="rtl"] .ai-launcher{right:auto; left:24px;}
+  body[dir="rtl"] .ai-launcher .ai-dot{right:auto; left:2px;}
+
+  .ai-window{position:fixed; bottom:168px; right:24px; z-index:220; width:min(360px,90vw); max-height:min(520px,70vh); background:var(--white); border-radius:20px; box-shadow:0 14px 40px rgba(0,0,0,.3); display:none; flex-direction:column; overflow:hidden;}
+  .ai-window.open{display:flex; animation:slideDown .25s ease;}
+  body[dir="rtl"] .ai-window{right:auto; left:24px;}
+  .ai-head{background:var(--red); color:var(--white); padding:14px 16px; display:flex; align-items:center; gap:10px;}
+  .ai-head img{width:34px; height:34px; border-radius:50%; background:var(--white); object-fit:contain; padding:3px;}
+  .ai-head .ai-title{flex:1;}
+  .ai-head .ai-title b{display:block; font-size:.95rem;}
+  .ai-head .ai-title span{font-size:.72rem; opacity:.9; display:flex; align-items:center; gap:5px;}
+  .ai-head .ai-status-dot{width:8px; height:8px; background:#3CE07A; border-radius:50%; display:inline-block;}
+  .ai-head button{background:rgba(255,255,255,.2); color:var(--white); width:28px; height:28px; border-radius:50%; font-size:1rem;}
+  .ai-body{flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; background:var(--cream);}
+  .ai-msg{max-width:82%; padding:10px 13px; border-radius:14px; font-size:.86rem; line-height:1.45;}
+  .ai-msg.bot{background:var(--white); align-self:flex-start; border-bottom-left-radius:4px; box-shadow:0 2px 6px rgba(0,0,0,.06);}
+  .ai-msg.user{background:var(--red); color:var(--white); align-self:flex-end; border-bottom-right-radius:4px;}
+  .ai-quick{display:flex; flex-wrap:wrap; gap:6px; padding:0 14px 10px; background:var(--cream);}
+  .ai-quick button{background:var(--white); border:2px solid var(--red); color:var(--red-dark); font-size:.76rem; font-weight:700; padding:6px 11px; border-radius:16px;}
+  .ai-quick button:hover{background:var(--red); color:var(--white);}
+  .ai-input-row{display:flex; gap:8px; padding:12px; border-top:2px solid var(--cream); background:var(--white);}
+  .ai-input-row input{flex:1; border:2px solid #eee; border-radius:20px; padding:10px 14px; font-family:inherit; font-size:.85rem; background:var(--cream);}
+  .ai-input-row input:focus{outline:none; border-color:var(--red);}
+  .ai-input-row button{width:40px; height:40px; border-radius:50%; background:var(--red); color:var(--white); flex-shrink:0; display:flex; align-items:center; justify-content:center;}
+  .ai-input-row button svg{width:18px; height:18px;}
+  .ai-cta-wa{display:flex; align-items:center; justify-content:center; gap:8px; background:#25D366; color:var(--white); font-weight:800; font-size:.82rem; padding:9px; border-radius:14px; margin-top:2px; align-self:stretch; max-width:100%;}
+  .ai-typing{display:flex; gap:4px; padding:10px 13px; background:var(--white); border-radius:14px; align-self:flex-start; width:fit-content;}
+  .ai-typing span{width:6px; height:6px; background:#bbb; border-radius:50%; animation:aiTyping 1s infinite ease-in-out;}
+  .ai-typing span:nth-child(2){animation-delay:.15s;}
+  .ai-typing span:nth-child(3){animation-delay:.3s;}
+  @keyframes aiTyping{0%,60%,100%{transform:translateY(0); opacity:.4;} 30%{transform:translateY(-4px); opacity:1;}}
 
   .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap;}
   :focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
@@ -340,6 +424,16 @@
     <div class="video-wrap">
       <iframe src="https://www.youtube.com/embed/iMZhErQLapk" title="Hamido Events" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
+    <div class="video-grid">
+      <div class="video-card">
+        <span class="v-tag" data-i18n="videos.tag1">Ambiance live</span>
+        <video src="https://i.imgur.com/CPRWEPp.mp4" controls muted loop playsinline preload="metadata"></video>
+      </div>
+      <div class="video-card">
+        <span class="v-tag" data-i18n="videos.tag2">Ambiance live</span>
+        <video src="https://i.imgur.com/ZUl5k9E.mp4" controls muted loop playsinline preload="metadata"></video>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -376,15 +470,11 @@
         <div class="info-item"><span class="icon">📞</span><span>+212 6 00 02 05 23</span></div>
         <div class="info-item"><span class="icon">✉️</span><span>contact@hamidoevents.ma</span></div>
         <div class="info-item"><span class="icon">🕒</span><span data-i18n="contact.hours">Tous les jours, 9h – 22h</span></div>
-        <div class="socials">
-          <a href="https://wa.me/212600020523" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
-          <a href="https://www.facebook.com/profile.php?id=61587723565284" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-          <a href="https://www.instagram.com/hamido_events/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
-          <a href="https://www.tiktok.com/@jamal.nmar?_r=1&_t=ZS-98WIfQg1PbZ" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
-          <a href="https://youtube.com/@hamidoyevents?si=uNfRd3EoNRaj1C0F" target="_blank" rel="noopener" aria-label="YouTube">▶️</a>
-        </div>
+        <div class="socials" id="contactSocials"></div>
       </div>
       <form id="contactForm" novalidate>
+        <div class="form-steps" aria-hidden="true"><span class="done"></span><span></span></div>
+
         <label for="f-name" data-i18n="contact.name">Nom complet</label>
         <input type="text" id="f-name" name="name" required>
 
@@ -403,11 +493,32 @@
         <label for="f-date" data-i18n="contact.date">Date de l'événement</label>
         <input type="date" id="f-date" name="date">
 
+        <label data-i18n="contact.services">Type de spectacle souhaité</label>
+        <div class="chip-group" id="serviceChips">
+          <div class="chip-check"><input type="checkbox" id="sv-clown" value="Clown"><label for="sv-clown" data-i18n="services.s1title">Hamido le Clown</label></div>
+          <div class="chip-check"><input type="checkbox" id="sv-dj" value="DJ"><label for="sv-dj" data-i18n="services.s2title">DJ & Ambiance</label></div>
+          <div class="chip-check"><input type="checkbox" id="sv-magie" value="Magie"><label for="sv-magie" data-i18n="services.s3title">Magie pour enfants</label></div>
+          <div class="chip-check"><input type="checkbox" id="sv-jeux" value="Jeux"><label for="sv-jeux" data-i18n="services.s4title">Jeux & Défis</label></div>
+          <div class="chip-check"><input type="checkbox" id="sv-chansons" value="Chansons"><label for="sv-chansons" data-i18n="services.s5title">Chansons</label></div>
+        </div>
+
+        <label data-i18n="contact.guests">Nombre d'invités (environ)</label>
+        <div class="qty-row">
+          <button type="button" id="qtyMinus" aria-label="-">−</button>
+          <span id="qtyValue">20</span>
+          <button type="button" id="qtyPlus" aria-label="+">+</button>
+        </div>
+
         <label for="f-message" data-i18n="contact.message">Message</label>
         <textarea id="f-message" name="message" required></textarea>
 
         <button type="submit" class="btn" id="submitBtn" data-i18n="contact.submit">Envoyer sur WhatsApp</button>
         <p class="form-note" data-i18n="contact.note">En envoyant, vous serez redirigé vers WhatsApp avec votre message prérempli.</p>
+
+        <div class="form-success" id="formSuccess">
+          <div class="icon">🎉</div>
+          <p data-i18n="contact.success">Merci ! Votre demande a été préparée, finalisez-la sur WhatsApp.</p>
+        </div>
       </form>
     </div>
   </div>
@@ -425,18 +536,48 @@
     <a href="#testimonials" data-i18n="nav.testimonials">Avis</a>
     <a href="#contact" data-i18n="nav.contact">Contact</a>
   </div>
-  <div class="socials">
-    <a href="https://wa.me/212600020523" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
-    <a href="https://www.facebook.com/profile.php?id=61587723565284" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-    <a href="https://www.instagram.com/hamido_events/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
-    <a href="https://www.tiktok.com/@jamal.nmar?_r=1&_t=ZS-98WIfQg1PbZ" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
-    <a href="https://youtube.com/@hamidoyevents?si=uNfRd3EoNRaj1C0F" target="_blank" rel="noopener" aria-label="YouTube">▶️</a>
-  </div>
+  <div class="socials" id="footerSocials"></div>
   <p data-i18n="footer.text">© 2026 Hamido Events — Kénitra, Maroc. Tous droits réservés.</p>
   <p style="margin-top:8px; font-size:.75rem; opacity:.6;" data-i18n="footer.credit">Créé par Herio Marketing Digital</p>
 </footer>
 
-<a class="whatsapp-float" href="https://wa.me/212600020523" target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp">💬</a>
+<!-- Floating original-logo social sidebar -->
+<div class="social-sidebar" id="socialSidebar"></div>
+
+<!-- Floating WhatsApp button (advanced) -->
+<a class="whatsapp-float" id="waFloat" href="https://wa.me/212600020523" target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp">
+  <span class="wa-ring"></span>
+  <span class="wa-ring wa-ring2"></span>
+  <span class="wa-badge">1</span>
+  <span class="wa-tip" data-i18n="wa.tip">Discutez avec nous !</span>
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.04 3C9.37 3 3.98 8.39 3.98 15.06c0 2.23.6 4.32 1.65 6.13L3 29l7.99-2.58a12.02 12.02 0 0 0 5.05 1.11h.01c6.67 0 12.06-5.39 12.06-12.06C28.11 8.86 22.72 3 16.04 3zm0 21.94h-.01a10.03 10.03 0 0 1-5.11-1.4l-.37-.22-4.74 1.53 1.55-4.62-.24-.38a9.9 9.9 0 0 1-1.53-5.29c0-5.5 4.48-9.98 9.99-9.98 2.67 0 5.17 1.04 7.06 2.93a9.92 9.92 0 0 1 2.93 7.06c0 5.51-4.48 9.97-9.53 9.97zm5.47-7.47c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
+</a>
+
+<!-- AI Assistant launcher + window -->
+<button class="ai-launcher" id="aiLauncher" aria-label="Assistant virtuel">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2v1h1a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h1V4a2 2 0 0 1 2-2z"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/><path d="M2 10v3M22 10v3"/></svg>
+  <span class="ai-dot"></span>
+</button>
+
+<div class="ai-window" id="aiWindow" role="dialog" aria-label="Assistant virtuel Hamido Events">
+  <div class="ai-head">
+    <img src="https://i.imgur.com/GL2SkQV.png" alt="">
+    <div class="ai-title">
+      <b data-i18n="ai.title">Assistant Hamido</b>
+      <span><span class="ai-status-dot"></span><span data-i18n="ai.online">En ligne</span></span>
+    </div>
+    <button id="aiClose" aria-label="Fermer">✕</button>
+  </div>
+  <div class="ai-body" id="aiBody"></div>
+  <div class="ai-quick" id="aiQuick"></div>
+  <div class="ai-input-row">
+    <input type="text" id="aiInput" data-i18n-ph="ai.placeholder" placeholder="Écrivez votre question…" autocomplete="off">
+    <button id="aiSend" aria-label="Envoyer">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
 <button class="back-top" id="backTop" aria-label="Retour en haut">↑</button>
 
 <script>
@@ -457,14 +598,24 @@
       "services.s4title":"Jeux & Défis","services.s4text":"Activités et concours pour rassembler petits et grands.",
       "services.s5title":"Chansons","services.s5text":"Chansons pour enfants et adultes, pour tous les âges.",
       "gallery.eyebrow":"En images","gallery.title":"Galerie",
-      "videos.eyebrow":"En vidéo","videos.title":"Ambiance garantie",
+      "videos.eyebrow":"En vidéo","videos.title":"Ambiance garantie","videos.tag1":"Ambiance live","videos.tag2":"Ambiance live",
       "testimonials.eyebrow":"Avis clients","testimonials.title":"Ce que disent nos clients",
       "testimonials.note":"⭐ 4.9/5 sur Google — avis vérifiés de clients partout au Maroc.",
       "testimonials.link":"Voir tous les avis sur Google Maps →",
       "contact.eyebrow":"Contactez-nous","contact.title":"Réservez votre événement","contact.address":"Kénitra, Maroc","contact.hours":"Tous les jours, 9h – 22h",
-      "contact.name":"Nom complet","contact.phone":"Téléphone","contact.city":"Ville","contact.date":"Date de l'événement","contact.message":"Message","contact.submit":"Envoyer sur WhatsApp",
-      "contact.note":"En envoyant, vous serez redirigé vers WhatsApp avec votre message prérempli.","contact.required":"Merci de remplir les champs obligatoires.","contact.sent":"Message prêt ! Ouverture de WhatsApp…",
-      "footer.text":"© 2026 Hamido Events — Kénitra, Maroc. Tous droits réservés.","footer.credit":"Créé par Herio Marketing Digital"
+      "contact.name":"Nom complet","contact.phone":"Téléphone","contact.city":"Ville","contact.date":"Date de l'événement","contact.services":"Type de spectacle souhaité","contact.guests":"Nombre d'invités (environ)","contact.message":"Message","contact.submit":"Envoyer sur WhatsApp",
+      "contact.note":"En envoyant, vous serez redirigé vers WhatsApp avec votre message prérempli.","contact.required":"Merci de remplir les champs obligatoires.","contact.sent":"Message prêt ! Ouverture de WhatsApp…","contact.success":"Merci ! Votre demande a été préparée, finalisez-la sur WhatsApp.",
+      "footer.text":"© 2026 Hamido Events — Kénitra, Maroc. Tous droits réservés.","footer.credit":"Créé par Herio Marketing Digital",
+      "wa.tip":"Discutez avec nous !",
+      "ai.title":"Assistant Hamido","ai.online":"En ligne","ai.placeholder":"Écrivez votre question…",
+      "ai.greeting":"👋 Bonjour ! Je suis l'assistant virtuel de Hamido Events. Posez-moi une question sur nos spectacles, nos villes ou nos tarifs, ou choisissez une option ci-dessous.",
+      "ai.q1":"Quels spectacles proposez-vous ?","ai.q2":"Dans quelles villes intervenez-vous ?","ai.q3":"Quel est le tarif ?","ai.q4":"Comment réserver ?",
+      "ai.a1":"Nous proposons : Hamido le Clown, DJ & Ambiance, Magie pour enfants, Jeux & Défis et Chansons. Vous pouvez combiner plusieurs formules selon votre événement.",
+      "ai.a2":"Nous intervenons à Kénitra, Rabat, Casablanca, Tétouan et Tanger, et pouvons nous déplacer ailleurs sur demande.",
+      "ai.a3":"Le tarif dépend de la ville, de la durée et des spectacles choisis. Pour un devis précis et gratuit, le plus simple est de continuer sur WhatsApp.",
+      "ai.a4":"Il suffit de remplir le formulaire de contact ou de nous écrire directement sur WhatsApp avec la date et la ville de votre événement.",
+      "ai.fallback":"Je peux répondre aux questions sur nos spectacles, nos villes, nos tarifs et la réservation. Pour tout le reste, un de nos conseillers peut vous répondre directement sur WhatsApp.",
+      "ai.cta":"💬 Continuer sur WhatsApp"
     },
     en: {
       "nav.about":"About","nav.services":"Shows","nav.cities":"Cities","nav.gallery":"Gallery","nav.videos":"Videos","nav.testimonials":"Reviews","nav.contact":"Contact",
@@ -478,14 +629,24 @@
       "services.s4title":"Games & Challenges","services.s4text":"Activities and contests to bring everyone together.",
       "services.s5title":"Songs","services.s5text":"Songs for kids and adults, for all ages.",
       "gallery.eyebrow":"In pictures","gallery.title":"Gallery",
-      "videos.eyebrow":"On video","videos.title":"Guaranteed good vibes",
+      "videos.eyebrow":"On video","videos.title":"Guaranteed good vibes","videos.tag1":"Live vibes","videos.tag2":"Live vibes",
       "testimonials.eyebrow":"Customer reviews","testimonials.title":"What our clients say",
       "testimonials.note":"⭐ 4.9/5 on Google — verified reviews from clients all over Morocco.",
       "testimonials.link":"See all reviews on Google Maps →",
       "contact.eyebrow":"Contact us","contact.title":"Book your event","contact.address":"Kénitra, Morocco","contact.hours":"Every day, 9am – 10pm",
-      "contact.name":"Full name","contact.phone":"Phone","contact.city":"City","contact.date":"Event date","contact.message":"Message","contact.submit":"Send on WhatsApp",
-      "contact.note":"After sending, you'll be redirected to WhatsApp with your message pre-filled.","contact.required":"Please fill in the required fields.","contact.sent":"Message ready! Opening WhatsApp…",
-      "footer.text":"© 2026 Hamido Events — Kénitra, Morocco. All rights reserved.","footer.credit":"Created by Herio Marketing Digital"
+      "contact.name":"Full name","contact.phone":"Phone","contact.city":"City","contact.date":"Event date","contact.services":"Type of show wanted","contact.guests":"Number of guests (approx.)","contact.message":"Message","contact.submit":"Send on WhatsApp",
+      "contact.note":"After sending, you'll be redirected to WhatsApp with your message pre-filled.","contact.required":"Please fill in the required fields.","contact.sent":"Message ready! Opening WhatsApp…","contact.success":"Thanks! Your request is ready, finish it on WhatsApp.",
+      "footer.text":"© 2026 Hamido Events — Kénitra, Morocco. All rights reserved.","footer.credit":"Created by Herio Marketing Digital",
+      "wa.tip":"Chat with us!",
+      "ai.title":"Hamido Assistant","ai.online":"Online","ai.placeholder":"Type your question…",
+      "ai.greeting":"👋 Hi! I'm Hamido Events' virtual assistant. Ask me about our shows, cities or prices, or pick an option below.",
+      "ai.q1":"What shows do you offer?","ai.q2":"Which cities do you cover?","ai.q3":"What's the price?","ai.q4":"How do I book?",
+      "ai.a1":"We offer: Hamido the Clown, DJ & Party, Magic for kids, Games & Challenges and Songs. You can combine several for your event.",
+      "ai.a2":"We work in Kénitra, Rabat, Casablanca, Tétouan and Tangier, and can travel elsewhere on request.",
+      "ai.a3":"Price depends on the city, duration and shows chosen. For an exact free quote, the easiest way is to continue on WhatsApp.",
+      "ai.a4":"Just fill in the contact form or message us directly on WhatsApp with your event date and city.",
+      "ai.fallback":"I can answer questions about our shows, cities, prices and booking. For anything else, one of our team can help you directly on WhatsApp.",
+      "ai.cta":"💬 Continue on WhatsApp"
     },
     it: {
       "nav.about":"Chi siamo","nav.services":"Spettacoli","nav.cities":"Città","nav.gallery":"Galleria","nav.videos":"Video","nav.testimonials":"Recensioni","nav.contact":"Contatti",
@@ -499,14 +660,24 @@
       "services.s4title":"Giochi & Sfide","services.s4text":"Attività e concorsi per riunire grandi e piccini.",
       "services.s5title":"Canzoni","services.s5text":"Canzoni per bambini e adulti, per tutte le età.",
       "gallery.eyebrow":"In immagini","gallery.title":"Galleria",
-      "videos.eyebrow":"In video","videos.title":"Atmosfera garantita",
+      "videos.eyebrow":"In video","videos.title":"Atmosfera garantita","videos.tag1":"Atmosfera live","videos.tag2":"Atmosfera live",
       "testimonials.eyebrow":"Recensioni clienti","testimonials.title":"Cosa dicono i nostri clienti",
       "testimonials.note":"⭐ 4.9/5 su Google — recensioni verificate da clienti in tutto il Marocco.",
       "testimonials.link":"Vedi tutte le recensioni su Google Maps →",
       "contact.eyebrow":"Contattaci","contact.title":"Prenota il tuo evento","contact.address":"Kénitra, Marocco","contact.hours":"Tutti i giorni, 9:00 – 22:00",
-      "contact.name":"Nome completo","contact.phone":"Telefono","contact.city":"Città","contact.date":"Data dell'evento","contact.message":"Messaggio","contact.submit":"Invia su WhatsApp",
-      "contact.note":"Dopo l'invio verrai reindirizzato su WhatsApp con il messaggio precompilato.","contact.required":"Compila i campi obbligatori.","contact.sent":"Messaggio pronto! Apertura di WhatsApp…",
-      "footer.text":"© 2026 Hamido Events — Kénitra, Marocco. Tutti i diritti riservati.","footer.credit":"Creato da Herio Marketing Digital"
+      "contact.name":"Nome completo","contact.phone":"Telefono","contact.city":"Città","contact.date":"Data dell'evento","contact.services":"Tipo di spettacolo desiderato","contact.guests":"Numero di invitati (circa)","contact.message":"Messaggio","contact.submit":"Invia su WhatsApp",
+      "contact.note":"Dopo l'invio verrai reindirizzato su WhatsApp con il messaggio precompilato.","contact.required":"Compila i campi obbligatori.","contact.sent":"Messaggio pronto! Apertura di WhatsApp…","contact.success":"Grazie! La tua richiesta è pronta, completala su WhatsApp.",
+      "footer.text":"© 2026 Hamido Events — Kénitra, Marocco. Tutti i diritti riservati.","footer.credit":"Creato da Herio Marketing Digital",
+      "wa.tip":"Chatta con noi!",
+      "ai.title":"Assistente Hamido","ai.online":"Online","ai.placeholder":"Scrivi la tua domanda…",
+      "ai.greeting":"👋 Ciao! Sono l'assistente virtuale di Hamido Events. Chiedimi degli spettacoli, delle città o dei prezzi, oppure scegli un'opzione qui sotto.",
+      "ai.q1":"Quali spettacoli offrite?","ai.q2":"In quali città operate?","ai.q3":"Qual è il prezzo?","ai.q4":"Come si prenota?",
+      "ai.a1":"Offriamo: Hamido il Clown, DJ & Animazione, Magia per bambini, Giochi & Sfide e Canzoni. Puoi combinarne più di uno per il tuo evento.",
+      "ai.a2":"Operiamo a Kénitra, Rabat, Casablanca, Tétouan e Tangeri, e possiamo spostarci altrove su richiesta.",
+      "ai.a3":"Il prezzo dipende dalla città, dalla durata e dagli spettacoli scelti. Per un preventivo preciso e gratuito, il modo più semplice è continuare su WhatsApp.",
+      "ai.a4":"Basta compilare il modulo di contatto o scriverci direttamente su WhatsApp con data e città del tuo evento.",
+      "ai.fallback":"Posso rispondere a domande su spettacoli, città, prezzi e prenotazioni. Per tutto il resto, il nostro team può aiutarti direttamente su WhatsApp.",
+      "ai.cta":"💬 Continua su WhatsApp"
     },
     ar: {
       "nav.about":"من نحن","nav.services":"العروض","nav.cities":"المدن","nav.gallery":"معرض الصور","nav.videos":"فيديوهات","nav.testimonials":"آراء العملاء","nav.contact":"اتصل بنا",
@@ -520,14 +691,24 @@
       "services.s4title":"ألعاب وتحديات","services.s4text":"أنشطة ومسابقات لجمع الصغار والكبار.",
       "services.s5title":"أغاني","services.s5text":"أغاني للأطفال والكبار، لجميع الأعمار.",
       "gallery.eyebrow":"بالصور","gallery.title":"معرض الصور",
-      "videos.eyebrow":"بالفيديو","videos.title":"أجواء مضمونة",
+      "videos.eyebrow":"بالفيديو","videos.title":"أجواء مضمونة","videos.tag1":"أجواء مباشرة","videos.tag2":"أجواء مباشرة",
       "testimonials.eyebrow":"آراء العملاء","testimonials.title":"ماذا يقول عملاؤنا",
       "testimonials.note":"⭐ 4.9/5 على غوغل — تقييمات موثقة من عملاء في جميع أنحاء المغرب.",
       "testimonials.link":"شاهد جميع التقييمات على خرائط غوغل ←",
       "contact.eyebrow":"اتصل بنا","contact.title":"احجز حفلتك","contact.address":"القنيطرة، المغرب","contact.hours":"كل يوم، 9 صباحًا – 10 مساءً",
-      "contact.name":"الاسم الكامل","contact.phone":"الهاتف","contact.city":"المدينة","contact.date":"تاريخ الحفل","contact.message":"الرسالة","contact.submit":"إرسال عبر واتساب",
-      "contact.note":"بعد الإرسال، سيتم توجيهك إلى واتساب مع رسالتك جاهزة مسبقًا.","contact.required":"يرجى ملء الحقول المطلوبة.","contact.sent":"الرسالة جاهزة! جارٍ فتح واتساب…",
-      "footer.text":"© 2026 هاميدو إيفنتس — القنيطرة، المغرب. جميع الحقوق محفوظة.","footer.credit":"من إنشاء هيريو ماركتينغ ديجيتال"
+      "contact.name":"الاسم الكامل","contact.phone":"الهاتف","contact.city":"المدينة","contact.date":"تاريخ الحفل","contact.services":"نوع العرض المطلوب","contact.guests":"عدد الضيوف (تقريبًا)","contact.message":"الرسالة","contact.submit":"إرسال عبر واتساب",
+      "contact.note":"بعد الإرسال، سيتم توجيهك إلى واتساب مع رسالتك جاهزة مسبقًا.","contact.required":"يرجى ملء الحقول المطلوبة.","contact.sent":"الرسالة جاهزة! جارٍ فتح واتساب…","contact.success":"شكرًا! تم تجهيز طلبك، أكمله عبر واتساب.",
+      "footer.text":"© 2026 هاميدو إيفنتس — القنيطرة، المغرب. جميع الحقوق محفوظة.","footer.credit":"من إنشاء هيريو ماركتينغ ديجيتال",
+      "wa.tip":"تحدث معنا!",
+      "ai.title":"مساعد هاميدو","ai.online":"متصل الآن","ai.placeholder":"اكتب سؤالك…",
+      "ai.greeting":"👋 مرحبًا! أنا المساعد الافتراضي لـ Hamido Events. اسألني عن عروضنا أو مدننا أو أسعارنا، أو اختر أحد الخيارات أدناه.",
+      "ai.q1":"ما هي العروض المتوفرة؟","ai.q2":"في أي المدن تتدخلون؟","ai.q3":"ما هو السعر؟","ai.q4":"كيف أحجز؟",
+      "ai.a1":"نقدم: هاميدو المهرج، دي جي وأجواء، سحر للأطفال، ألعاب وتحديات وأغاني. يمكنك الجمع بين عدة عروض حسب حفلتك.",
+      "ai.a2":"نتدخل في القنيطرة، الرباط، الدار البيضاء، تطوان وطنجة، ويمكننا التنقل إلى مدن أخرى عند الطلب.",
+      "ai.a3":"يعتمد السعر على المدينة والمدة والعروض المختارة. للحصول على عرض سعر دقيق ومجاني، الأسهل هو المتابعة عبر واتساب.",
+      "ai.a4":"يكفي ملء استمارة الاتصال أو مراسلتنا مباشرة عبر واتساب مع تاريخ ومدينة حفلتك.",
+      "ai.fallback":"يمكنني الإجابة عن أسئلة حول عروضنا ومدننا وأسعارنا والحجز. لأي شيء آخر، يمكن لأحد مستشارينا الرد عليك مباشرة عبر واتساب.",
+      "ai.cta":"💬 المتابعة عبر واتساب"
     }
   };
 
@@ -539,12 +720,17 @@
       const key = el.getAttribute("data-i18n");
       if(dict[key]) el.textContent = dict[key];
     });
+    document.querySelectorAll("[data-i18n-ph]").forEach(el => {
+      const key = el.getAttribute("data-i18n-ph");
+      if(dict[key]) el.setAttribute("placeholder", dict[key]);
+    });
     document.documentElement.lang = lang;
     document.body.dir = (lang === "ar") ? "rtl" : "ltr";
     document.querySelectorAll(".lang-switch button").forEach(b => {
       b.classList.toggle("active", b.getAttribute("data-lang") === lang);
     });
     currentLang = lang;
+    renderAiQuick();
   }
 
   document.getElementById("langSwitch").addEventListener("click", function(e){
@@ -552,8 +738,6 @@
     if(!btn) return;
     applyTranslations(btn.getAttribute("data-lang"));
   });
-
-  applyTranslations("fr");
 
   /* ---------------- Burger menu ---------------- */
   const burger = document.getElementById("burger");
@@ -568,6 +752,19 @@
     burger.classList.remove("open");
     burger.setAttribute("aria-expanded", "false");
   }));
+
+  /* ---------------- Scrollspy (advanced menu) ---------------- */
+  const navAnchors = Array.from(navLinks.querySelectorAll("a[href^='#']"));
+  const spySections = navAnchors.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+  function updateSpy(){
+    let currentId = null;
+    const probe = window.scrollY + 130;
+    spySections.forEach(sec => {
+      if(sec.offsetTop <= probe) currentId = sec.id;
+    });
+    navAnchors.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + currentId));
+  }
+  window.addEventListener("scroll", updateSpy, {passive:true});
 
   /* ---------------- Lightbox ---------------- */
   const lightbox = document.getElementById("lightbox");
@@ -603,8 +800,54 @@
     window.scrollTo({top:0, behavior:"smooth"});
   });
 
-  /* ---------------- Contact form -> WhatsApp ---------------- */
+  /* ---------------- Original social logos (SVG) ---------------- */
+  const SOCIAL_ICONS = {
+    whatsapp: '<svg viewBox="0 0 32 32" fill="#25D366"><path d="M16.04 3C9.37 3 3.98 8.39 3.98 15.06c0 2.23.6 4.32 1.65 6.13L3 29l7.99-2.58a12.02 12.02 0 0 0 5.05 1.11h.01c6.67 0 12.06-5.39 12.06-12.06C28.11 8.86 22.72 3 16.04 3zm0 21.94h-.01a10.03 10.03 0 0 1-5.11-1.4l-.37-.22-4.74 1.53 1.55-4.62-.24-.38a9.9 9.9 0 0 1-1.53-5.29c0-5.5 4.48-9.98 9.99-9.98 2.67 0 5.17 1.04 7.06 2.93a9.92 9.92 0 0 1 2.93 7.06c0 5.51-4.48 9.97-9.53 9.97zm5.47-7.47c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>',
+    facebook: '<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#1877F2"/><path fill="#fff" d="M18.9 16.7h-2.3V25h-3.4v-8.3h-1.7v-2.9h1.7v-1.9c0-2 .9-3.8 3.9-3.8h2.4v2.9h-1.7c-.4 0-.9.2-.9 1v1.8h2.7l-.7 2.9z"/></svg>',
+    instagram: '<svg viewBox="0 0 32 32"><defs><linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FEE411"/><stop offset="25%" stop-color="#FD5949"/><stop offset="50%" stop-color="#D6249F"/><stop offset="100%" stop-color="#285AEB"/></linearGradient></defs><rect x="3" y="3" width="26" height="26" rx="8" fill="url(#igGrad)"/><rect x="9.5" y="9.5" width="13" height="13" rx="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="16" cy="16" r="3.6" fill="none" stroke="#fff" stroke-width="2"/><circle cx="22.3" cy="9.7" r="1.3" fill="#fff"/></svg>',
+    tiktok: '<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#000"/><path fill="#25F4EE" d="M20.8 12.3a5 5 0 0 1-3-1.4v7.4a5.1 5.1 0 1 1-4.4-5v2.4a2.7 2.7 0 1 0 1.9 2.6V6.5h2.5a5 5 0 0 0 3 4.2v1.6z"/><path fill="#FE2C55" d="M21.6 12.3a5 5 0 0 1-3-1.4v7.4a5.1 5.1 0 1 1-4.4-5v2.4a2.7 2.7 0 1 0 1.9 2.6V6.5h2.5a5 5 0 0 0 3 4.2v1.6z" opacity=".85" transform="translate(-1,0)"/></svg>',
+    youtube: '<svg viewBox="0 0 32 32"><rect x="2" y="7" width="28" height="18" rx="6" fill="#FF0000"/><path fill="#fff" d="M13 12.5l8 3.5-8 3.5z"/></svg>'
+  };
+
+  const SOCIAL_LINKS = [
+    {key:"whatsapp", url:"https://wa.me/212600020523", label:"WhatsApp"},
+    {key:"facebook", url:"https://www.facebook.com/profile.php?id=61587723565284", label:"Facebook"},
+    {key:"instagram", url:"https://www.instagram.com/hamido_events/?utm_source=ig_web_button_share_sheet", label:"Instagram"},
+    {key:"tiktok", url:"https://www.tiktok.com/@jamal.nmar?_r=1&_t=ZS-98WIfQg1PbZ", label:"TikTok"},
+    {key:"youtube", url:"https://youtube.com/@hamidoyevents?si=uNfRd3EoNRaj1C0F", label:"YouTube"}
+  ];
+
+  function buildSocials(container, withLabel){
+    if(!container) return;
+    container.innerHTML = SOCIAL_LINKS.map(s =>
+      `<a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.label}">${SOCIAL_ICONS[s.key]}${withLabel ? `<span class="s-label">${s.label}</span>` : ""}</a>`
+    ).join("");
+  }
+  buildSocials(document.getElementById("socialSidebar"), true);
+  buildSocials(document.getElementById("contactSocials"), false);
+  buildSocials(document.getElementById("footerSocials"), false);
+
+  /* ---------------- Contact form -> WhatsApp (advanced) ---------------- */
   const form = document.getElementById("contactForm");
+  const qtyValue = document.getElementById("qtyValue");
+  document.getElementById("qtyMinus").addEventListener("click", () => {
+    qtyValue.textContent = Math.max(5, parseInt(qtyValue.textContent,10) - 5);
+  });
+  document.getElementById("qtyPlus").addEventListener("click", () => {
+    qtyValue.textContent = Math.min(500, parseInt(qtyValue.textContent,10) + 5);
+  });
+
+  const dateInput = document.getElementById("f-date");
+  const today = new Date().toISOString().split("T")[0];
+  dateInput.setAttribute("min", today);
+
+  const formSteps = document.querySelectorAll(".form-steps span");
+  form.addEventListener("input", function(){
+    const name = document.getElementById("f-name").value.trim();
+    const phone = document.getElementById("f-phone").value.trim();
+    formSteps[1].classList.toggle("done", !!(name && phone));
+  });
+
   form.addEventListener("submit", function(e){
     e.preventDefault();
     const name = document.getElementById("f-name");
@@ -612,6 +855,8 @@
     const message = document.getElementById("f-message");
     const city = document.getElementById("f-city").value;
     const date = document.getElementById("f-date").value;
+    const guests = qtyValue.textContent;
+    const services = Array.from(document.querySelectorAll("#serviceChips input:checked")).map(i => i.value);
 
     let valid = true;
     [name, phone, message].forEach(field => {
@@ -625,26 +870,133 @@
       return;
     }
 
+    const dict = translations[currentLang];
     const lines = [
-      "Hamido Events — " + (translations[currentLang]["contact.title"] || "Demande de devis"),
-      (translations[currentLang]["contact.name"] || "Nom") + ": " + name.value.trim(),
-      (translations[currentLang]["contact.phone"] || "Téléphone") + ": " + phone.value.trim(),
-      (translations[currentLang]["contact.city"] || "Ville") + ": " + city,
-      date ? (translations[currentLang]["contact.date"] || "Date") + ": " + date : null,
-      (translations[currentLang]["contact.message"] || "Message") + ": " + message.value.trim()
+      "Hamido Events — " + (dict["contact.title"] || "Demande de devis"),
+      (dict["contact.name"] || "Nom") + ": " + name.value.trim(),
+      (dict["contact.phone"] || "Téléphone") + ": " + phone.value.trim(),
+      (dict["contact.city"] || "Ville") + ": " + city,
+      date ? (dict["contact.date"] || "Date") + ": " + date : null,
+      services.length ? (dict["contact.services"] || "Spectacles") + ": " + services.join(", ") : null,
+      (dict["contact.guests"] || "Invités") + ": " + guests,
+      (dict["contact.message"] || "Message") + ": " + message.value.trim()
     ].filter(Boolean).join("\n");
 
     const url = "https://wa.me/212600020523?text=" + encodeURIComponent(lines);
-    showToast(translations[currentLang]["contact.sent"]);
+    showToast(dict["contact.sent"]);
+    document.getElementById("formSuccess").classList.add("show");
     window.open(url, "_blank", "noopener");
+    setTimeout(() => document.getElementById("formSuccess").classList.remove("show"), 4000);
     form.reset();
+    formSteps[1].classList.remove("done");
+    qtyValue.textContent = "20";
   });
 
   form.querySelectorAll("input, textarea").forEach(field => {
     field.addEventListener("input", () => field.classList.remove("field-error"));
   });
 
-  applyTranslations(currentLang);
+  /* ---------------- AI assistant widget ---------------- */
+  const aiLauncher = document.getElementById("aiLauncher");
+  const aiWindow = document.getElementById("aiWindow");
+  const aiBody = document.getElementById("aiBody");
+  const aiQuick = document.getElementById("aiQuick");
+  const aiInput = document.getElementById("aiInput");
+  let aiOpened = false;
+
+  const KEYWORD_MAP = [
+    {keys:["spectacle","show","spettacol","عرض","عروض","clown","dj","magie","magic","سحر"], answerKey:"ai.a1"},
+    {keys:["ville","city","città","مدين","kenitra","rabat","casablanca","tanger","tetouan","tangeri"], answerKey:"ai.a2"},
+    {keys:["prix","tarif","price","prezzo","سعر","cout","coût","devis"], answerKey:"ai.a3"},
+    {keys:["réserv","reserv","book","prenot","حجز","comment faire"], answerKey:"ai.a4"}
+  ];
+
+  function addMsg(text, who){
+    const div = document.createElement("div");
+    div.className = "ai-msg " + who;
+    div.textContent = text;
+    aiBody.appendChild(div);
+    aiBody.scrollTop = aiBody.scrollHeight;
+    return div;
+  }
+
+  function addWaCta(){
+    const dict = translations[currentLang];
+    const a = document.createElement("a");
+    a.className = "ai-cta-wa";
+    a.href = "https://wa.me/212600020523";
+    a.target = "_blank"; a.rel = "noopener";
+    a.textContent = dict["ai.cta"];
+    aiBody.appendChild(a);
+    aiBody.scrollTop = aiBody.scrollHeight;
+  }
+
+  function botReply(userText){
+    const typing = document.createElement("div");
+    typing.className = "ai-typing";
+    typing.innerHTML = "<span></span><span></span><span></span>";
+    aiBody.appendChild(typing);
+    aiBody.scrollTop = aiBody.scrollHeight;
+
+    setTimeout(() => {
+      typing.remove();
+      const dict = translations[currentLang];
+      const lower = userText.toLowerCase();
+      const match = KEYWORD_MAP.find(m => m.keys.some(k => lower.includes(k)));
+      if(match){
+        addMsg(dict[match.answerKey], "bot");
+      } else {
+        addMsg(dict["ai.fallback"], "bot");
+      }
+      addWaCta();
+    }, 650);
+  }
+
+  function renderAiQuick(){
+    const dict = translations[currentLang];
+    const qKeys = [["ai.q1","ai.a1"],["ai.q2","ai.a2"],["ai.q3","ai.a3"],["ai.q4","ai.a4"]];
+    aiQuick.innerHTML = "";
+    qKeys.forEach(([qKey, aKey]) => {
+      const b = document.createElement("button");
+      b.textContent = dict[qKey];
+      b.addEventListener("click", () => {
+        addMsg(dict[qKey], "user");
+        botReply(dict[qKey]);
+      });
+      aiQuick.appendChild(b);
+    });
+  }
+
+  function openAi(){
+    aiWindow.classList.add("open");
+    if(!aiOpened){
+      aiOpened = true;
+      addMsg(translations[currentLang]["ai.greeting"], "bot");
+      renderAiQuick();
+    }
+  }
+  aiLauncher.addEventListener("click", () => {
+    if(aiWindow.classList.contains("open")){
+      aiWindow.classList.remove("open");
+    } else {
+      openAi();
+    }
+  });
+  document.getElementById("aiClose").addEventListener("click", () => aiWindow.classList.remove("open"));
+
+  function sendUserMsg(){
+    const val = aiInput.value.trim();
+    if(!val) return;
+    addMsg(val, "user");
+    aiInput.value = "";
+    botReply(val);
+  }
+  document.getElementById("aiSend").addEventListener("click", sendUserMsg);
+  aiInput.addEventListener("keydown", e => { if(e.key === "Enter") sendUserMsg(); });
+
+  /* ---------------- init ---------------- */
+  applyTranslations("fr");
+  updateSpy();
 })();
 </script>
 </body>
